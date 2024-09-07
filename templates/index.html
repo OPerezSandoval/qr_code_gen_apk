@@ -1,17 +1,86 @@
-<!-- templates/index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QR Code Generator</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            text-align: center;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+        }
+
+        h1 {
+            color: #14C374;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 10px;
+            font-size: 16px;
+            color: white;
+            background-color: #14C374;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #12a365;
+        }
+
+        .logo {
+            margin-top: 20px;
+        }
+
+        .logo img {
+            width: 150px;
+        }
+    </style>
 </head>
 <body>
-    <h1>QR Code Generator</h1>
-    <form method="POST">
-        <input type="text" name="qr_input" placeholder="Enter text for QR code" required>
-        <button type="submit">Generate QR Code</button>
-    </form>
+    <div class="container">
+        <h1>QR Code Generator</h1>
+        <form method="POST">
+            <input type="text" name="qr_input" placeholder="Enter text for QR code" required>
+            <button type="submit">Generate QR Code</button>
+        </form>
+        <div class="logo">
+            <img src="{{ url_for('static', filename='apkudo_logo_new.jpg') }}" alt="Apkudo Logo">
+        </div>
+    </div>
 </body>
 </html>
 
