@@ -21,7 +21,7 @@ def home():
     return render_template('index.html')
 
 def generate_qr_code(input_text):
-    LOGO = 'apkudo_logo_new.jpg'
+    LOGO = 'static/apkudo_logo_new.jpg'
     OUTPUT = os.path.join(QR_CODE_FOLDER, f"{input_text}.png")
 
     # Create the QR code
