@@ -32,7 +32,7 @@ pipeline {
             steps {
                 sshagent(['ec2-ssh-credentials']) {
                     sh """
-                        ssh -o StrictHostKeyChecking=no ubuntu@$EC2_HOST '/deploy.sh'
+                        ssh -o StrictHostKeyChecking=no ubuntu@$EC2_HOST '~/deploy.sh'
                     """
                 }
             }
