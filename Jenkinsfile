@@ -1,23 +1,35 @@
 pipeline {
     agent any
+    environment {
+        DOCKERHUB_CREDENTIALS = credentials('dockerhub-credentials') 
+        DOCKER_IMAGE = 'operez11/qr-code-generator' 
+    }
     stages {
         stage('Build') {
             steps {
-                echo 'Building...'
-                // Add Docker build commands or other build steps here
+                script {
+                    sh 'docker build -t $DOCKER_IMAGE .'
+                }
             }
         }
-        stage('Test') {
+        stage('Login to DockerHub') {
             steps {
-                echo 'Testing...'
-                // Add any test commands or steps here
+                script {
+                    sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+                }
             }
         }
-        stage('Deploy') {
+        stage('Push to DockerHub') {
             steps {
-                echo 'Deploying...'
-                // Add deployment steps here
+                script {
+                    sh 'docker push $DOCKER_IMAGE'
+                }
             }
+        }
+    }
+    post {
+        always {
+            cleanWs()
         }
     }
 }
