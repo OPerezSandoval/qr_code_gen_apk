@@ -4,7 +4,7 @@ pipeline {
         DOCKERHUB_CREDENTIALS = credentials('dockerhub-credentials')
         DOCKER_IMAGE = 'operez11/qr-code-generator'
         EC2_CREDENTIALS = credentials('ec2-ssh-credentials')
-        EC2_HOST = '44.243.34.120'
+        EC2_HOST = '44.243.34.120' 
     }
     stages {
         stage('Build') {
@@ -32,7 +32,7 @@ pipeline {
             steps {
                 sshagent(['ec2-ssh-credentials']) {
                     sh """
-                        ssh -o StrictHostKeyChecking=no ubuntu@$EC2_HOST 'bash -s' < deploy.sh
+                        ssh -o StrictHostKeyChecking=no ubuntu@$EC2_HOST '~/deploy.sh'
                     """
                 }
             }
