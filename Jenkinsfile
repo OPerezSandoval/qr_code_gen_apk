@@ -1,8 +1,10 @@
 pipeline {
     agent any
     environment {
-        DOCKERHUB_CREDENTIALS = credentials('dockerhub-credentials') 
-        DOCKER_IMAGE = 'operez11/qr-code-generator' 
+        DOCKERHUB_CREDENTIALS = credentials('dockerhub-credentials')
+        DOCKER_IMAGE = 'operez11/qr-code-generator'
+        EC2_CREDENTIALS = credentials('ec2-ssh-credentials')
+        EC2_HOST = '44.243.34.120'
     }
     stages {
         stage('Build') {
@@ -23,6 +25,15 @@ pipeline {
             steps {
                 script {
                     sh 'docker push $DOCKER_IMAGE'
+                }
+            }
+        }
+        stage('Deploy to EC2') {
+            steps {
+                sshagent(['ec2-ssh-credentials']) {
+                    sh """
+                        ssh -o StrictHostKeyChecking=no ubuntu@$EC2_HOST 'bash -s' < deploy.sh
+                    """
                 }
             }
         }
