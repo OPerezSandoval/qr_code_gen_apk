@@ -1,4 +1,4 @@
-# QR Code Generator - Deployed on Kubernetes utilizing Minikube
+# QR Code Generator - Deployed with Kubernetes utilizing Minikube
 
 This repository contains the code and configuration files to deploy a QR code generator application using Kubernetes in a Minikube environment.
 
