@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: qr-code-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: qr-code-app
+  template:
+    metadata:
+      labels:
+        app: qr-code-app
+    spec:
+      containers:
+      - name: qr-code-container
+        image: operez11/qr-code-generator:latest 
+        ports:
+        - containerPort: 5000
+
